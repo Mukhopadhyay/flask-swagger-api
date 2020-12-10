@@ -1,0 +1,9 @@
+# Generated files
+__pycache__/
+# Jupyter Notebook
+.ipynb_checkpoints/*
+.ipynb_checkpoints
+# Ide Generated
+.vscode/*
+# Envs
+venv/
