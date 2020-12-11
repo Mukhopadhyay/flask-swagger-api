@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup
 import configs as cfg
+from utils.utils import save_as_pkl
 
 def get_html() -> BeautifulSoup:
     html = requests.get(cfg.URL).text
@@ -67,9 +68,8 @@ def main():
     attrs, attrs_desc = process_attrs(attrs, attrs_desc)
 
     hero_stats = generate_dataframe(table, attrs)
-    # Save hero_stats in binary format
+    save_as_pkl(hero_stats, [cfg.DATA_DIR, cfg.DATA_FILE])
 
-    print(hero_stats.shape)
 
 # Driver code
 if __name__ == '__main__':
