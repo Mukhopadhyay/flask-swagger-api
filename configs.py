@@ -6,5 +6,7 @@ PROJECT_SETTINGS = {
 }
 
 SERVER_SETTINGS = {
-    'PORT':5000
+    'PORT':5000,
+    'SWAGGER_URL':'/swagger',
+    'SWAGGER_API_URL':'/static/swagger,json'
 }
