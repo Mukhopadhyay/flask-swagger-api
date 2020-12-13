@@ -1,7 +1,7 @@
 import warnings
 warnings.filterwarnings('ignore')
 
-from flask import json, jsonify, request, Blueprint
+from flask import jsonify, request, Blueprint
 from flask_cors import cross_origin
 from utils.utils import read_from_pkl
 from utils import serv_utils
@@ -13,9 +13,15 @@ def get_routes() -> Blueprint:
     return serv_routes
 
 # Reading the dataframe
-df = read_from_pkl([cfg.DATA_DIR, cfg.DATA_FILE])
+df = read_from_pkl([
+    cfg.PROJECT_SETTINGS.get('DATA_DIR'),
+    cfg.PROJECT_SETTINGS.get('DATA_FILE')
+])
 # Reading the description
-attrs_desc = read_from_pkl([cfg.DATA_DIR, cfg.DESC_FILE])
+attrs_desc = read_from_pkl([
+    cfg.PROJECT_SETTINGS.get('DATA_DIR'),
+    cfg.PROJECT_SETTINGS.get('DESC_FILE')
+])
 
 @cross_origin
 @serv_routes.route('/', methods=['GET', 'POST'])
