@@ -1,7 +1,6 @@
 import warnings
 warnings.filterwarnings('ignore')
 
-import datetime
 from flask import json, jsonify, request, Blueprint
 from flask_cors import cross_origin
 from utils.utils import read_from_pkl
@@ -15,6 +14,8 @@ def get_routes() -> Blueprint:
 
 # Reading the dataframe
 df = read_from_pkl([cfg.DATA_DIR, cfg.DATA_FILE])
+# Reading the description
+attrs_desc = read_from_pkl([cfg.DATA_DIR, cfg.DESC_FILE])
 
 @cross_origin
 @serv_routes.route('/', methods=['GET', 'POST'])
@@ -41,3 +42,34 @@ def get_heroes(name):
             'REQUEST': name,
             'Timestamp': serv_utils.get_timestamp()
         }), 400
+
+@cross_origin
+@serv_routes.route('/all', methods=['GET'])
+def get_all():
+    result = serv_utils.get_all_hero_details(df)
+    return jsonify({
+        'RESPONSE': result,
+        'REQUEST': None,
+        'Timestamp': serv_utils.get_timestamp()
+    })
+
+@cross_origin
+@serv_routes.route('/desc', methods=['GET'])
+def get_desc():
+    result = serv_utils.get_attr_desc(df, attrs_desc)
+    return jsonify({
+        'RESPONSE': result,
+        'REQUEST': None,
+        'Timestamp': serv_utils.get_timestamp()
+    }), 200
+
+@cross_origin
+@serv_routes.route('/order/', methods=['POST'])
+def order_by_attr():
+    req = request.get_json()
+    result = serv_utils.order_by_attr(df, req)
+    return jsonify({
+        'RESPONSE': result,
+        'REQUEST': req,
+        'Timestamp': serv_utils.get_timestamp()
+    })

@@ -15,7 +15,7 @@ app.register_blueprint(routes)
 
 # Driver code
 if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', cfg.PORT))
+    PORT = int(os.environ.get('PORT', cfg.SERVER_SETTINGS.get('PORT')))
     CORS = CORS(app)
     # Dev mode run
     app.run(port=PORT, debug=True)

@@ -1,6 +1,10 @@
-URL = 'https://dota2.gamepedia.com/Table_of_hero_attributes'
+PROJECT_SETTINGS = {
+    'DATA_DIR':'data',
+    'DATA_FILE':'data.pkl',
+    'DESC_FILE':'desc.pkl',
+    'URL':'https://dota2.gamepedia.com/Table_of_hero_attributes'
+}
 
-DATA_DIR = 'data'
-DATA_FILE = 'data.pkl'
-
-PORT = 5000
+SERVER_SETTINGS = {
+    'PORT':5000
+}

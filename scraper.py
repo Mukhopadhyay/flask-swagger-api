@@ -7,7 +7,7 @@ import configs as cfg
 from utils.utils import save_as_pkl
 
 def get_html() -> BeautifulSoup:
-    html = requests.get(cfg.URL).text
+    html = requests.get(cfg.PROJECT_SETTINGS.get('URL')).text
     soup = BeautifulSoup(html, 'lxml')
     return soup
 
@@ -68,8 +68,15 @@ def main():
     attrs, attrs_desc = process_attrs(attrs, attrs_desc)
 
     hero_stats = generate_dataframe(table, attrs)
-    save_as_pkl(hero_stats, [cfg.DATA_DIR, cfg.DATA_FILE])
 
+    save_as_pkl(
+        hero_stats,
+        [cfg.PROJECT_SETTINGS.get('DATA_DIR'), cfg.PROJECT_SETTINGS.get('DATA_FILE')]
+    )
+    save_as_pkl(
+        attrs_desc,
+        [cfg.PROJECT_SETTINGS.get('DATA_DIR'), cfg.PROJECT_SETTINGS.get('DESC_FILE')]
+    )
 
 # Driver code
 if __name__ == '__main__':
