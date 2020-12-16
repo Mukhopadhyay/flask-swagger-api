@@ -1,7 +1,5 @@
 import datetime
 
-from flask.globals import request
-
 def get_timestamp() -> str:
     return datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
 
@@ -29,6 +27,8 @@ def order_by_attr(df, request_body) -> list:
     data = []
     attr = request_body.get('attr')
     desc = request_body.get('desc')
+    print(request_body)
+    print(df[df[attr]==2])
     try:
         for _, hero in df.sort_values(
             by=attr,

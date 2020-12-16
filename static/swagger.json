@@ -1,0 +1,190 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "API for dota 2 hero stats",
+        "version": "1.0.0",
+        "title": "Flask-Swagger-API",
+        "contact": {
+            "email": "praneshmukherjee7@gmail.com"
+        }
+    },
+    "tags": [
+        {
+            "name": "Test",
+            "description": "Test Endpoints"
+        },
+        {
+            "name": "Descriptions",
+            "description": "API attribute descriptions"
+        },
+        {
+            "name": "Hero stats",
+            "description": "Dota 2 Hero stats"
+        }
+    ],
+    "paths": {
+        "/": {
+            "post": {
+                "tags": ["Test"],
+                "summary": "Index route",
+                "products": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/components/schemas/index_response"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Test"],
+                "summary": "Index route",
+                "products": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/components/schemas/index_response"
+                        }
+                    }
+                }
+            }
+        },
+        "/heroes/{name}": {
+            "parameters": [
+                {
+                    "name": "name",
+                    "in": "path",
+                    "required": true,
+                    "description": "Hero name separated by underscore if contains any whitespace",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Hero stats"
+                ],
+                "summary": "Get hero stats",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "name",
+                        "required": true,
+                        "description": "Hero name separated by underscore if contains any whitespace",
+                        "schema": {
+                            "$ref": "#/components/schemas/hero_name"
+                        },
+                        "example": "arc_warden"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/all": {
+            "get": {
+                "tags": [
+                    "Hero stats"
+                ],
+                "summary": "Get all hero stats",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/desc": {
+            "get": {
+                "tags": [
+                    "Descriptions"
+                ],
+                "summary": "Attribute description",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/order/": {
+            "post": {
+                "tags": [
+                    "Hero stats"
+                ],
+                "summary": "Order heroes based on given attribute",
+                "requestBody": {
+                    "description": "Order by and boolean for descending",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/order_request_body"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Invalid arguments!"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "index_response": {
+                "type": "object",
+                "properties": {
+                    "METHOD": {
+                        "type": "string",
+                        "example": "GET"
+                    },
+                    "MSG": {
+                        "type": "string",
+                        "example": "Working"
+                    },
+                    "Timestamp": {
+                        "type": "string",
+                        "example": "31/12/2020 00:00:00"
+                    }
+                }
+            },
+            "hero_name": {
+                "type": "string",
+                "properties": {
+                    "type": "string",
+                    "example": "arc_warden"
+                }
+            },
+            "order_request_body": {
+                "type": "object",
+                "properties": {
+                    "attr": {
+                        "type": "string",
+                        "example": "AGI"
+                    },
+                    "desc": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                }
+            }
+        }
+    }
+}

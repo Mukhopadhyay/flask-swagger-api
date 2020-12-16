@@ -1,3 +1,12 @@
+"""
+ENDPOINTS:
+    * /                 [GET,POST]
+    * /desc             [GET]
+    * /heroes/{name}    [GET]
+    * /all              [GET]
+    * /order/           [POST]
+"""
+
 import warnings
 warnings.filterwarnings('ignore')
 
