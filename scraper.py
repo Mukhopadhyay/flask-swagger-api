@@ -11,10 +11,10 @@ def get_html() -> BeautifulSoup:
     soup = BeautifulSoup(html, 'lxml')
     return soup
 
-def get_wikitable(soup, table_class) -> bs4.element.Tag:
+def get_wikitable(soup:BeautifulSoup, table_class:str) -> bs4.element.Tag:
     return soup.find('table', class_=table_class)
 
-def get_headers(table) -> tuple:
+def get_headers(table:bs4.element.Tag) -> tuple:
     rows = table.find_all('tr')
 
     # table headers
@@ -31,7 +31,7 @@ def get_headers(table) -> tuple:
     return (attrs, attrs_desc)
 
 
-def process_attrs(attrs, attrs_desc) -> tuple:
+def process_attrs(attrs:list, attrs_desc:list) -> tuple:
     attrs = list(map(lambda x: x.strip(), attrs))
     attrs_desc = list(map(
         lambda x: '' if not x else x,
@@ -39,7 +39,7 @@ def process_attrs(attrs, attrs_desc) -> tuple:
     ))
     return (attrs, attrs_desc)
 
-def generate_dataframe(table, attrs) -> pd.DataFrame:
+def generate_dataframe(table:bs4.element.Tag, attrs:list) -> pd.DataFrame:
     rows = table.find_all('tr')
     all_attributes = []
     for hero in rows[1:]:
@@ -59,7 +59,7 @@ def generate_dataframe(table, attrs) -> pd.DataFrame:
     return hero_stats
 
 
-def main():
+def main() -> None:
     soup = get_html()
     table = get_wikitable(soup, 'wikitable')
 

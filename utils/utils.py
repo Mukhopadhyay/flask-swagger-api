@@ -2,7 +2,7 @@ import os
 import pickle
 import pandas as pd
 
-def save_as_pkl(obj, path) -> None:
+def save_as_pkl(obj, path:list) -> None:
     steps = os.path.split(path) if isinstance(path, str) else path
     if os.path.exists(os.path.join(*steps[:-1])):
         save_loc = os.path.join(*path) if isinstance(path, list) else path
@@ -12,7 +12,7 @@ def save_as_pkl(obj, path) -> None:
     else:
         raise NotImplementedError
 
-def read_from_pkl(path) -> pd.DataFrame:
+def read_from_pkl(path:list) -> pd.DataFrame:
     steps = os.path.split(path) if isinstance(path, str) else path
     if os.path.exists(os.path.join(*steps[:-1])):
         read_loc = os.path.join(*path) if isinstance(path, list) else path

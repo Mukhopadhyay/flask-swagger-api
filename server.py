@@ -4,6 +4,7 @@ ENDPOINTS:
     * /desc             [GET]
     * /heroes/{name}    [GET]
     * /all              [GET]
+    * /all_names        [GET]
     * /order/           [POST]
 """
 
