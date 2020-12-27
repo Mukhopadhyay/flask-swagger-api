@@ -102,6 +102,19 @@
                 }
             }
         },
+        "/all_names": {
+            "get": {
+                "tags": [
+                    "Hero stats"
+                ],
+                "summary": "Get all hero names",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/desc": {
             "get": {
                 "tags": [

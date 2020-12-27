@@ -60,6 +60,16 @@ def get_all():
     })
 
 @cross_origin
+@serv_routes.route('/all_names', methods=['GET'])
+def get_all_names():
+    result = serv_utils.get_all_hero_names(df)
+    return jsonify({
+        'RESPONSE': result,
+        'REQUEST': None,
+        'Timestamp': serv_utils.get_timestamp()
+    })
+
+@cross_origin
 @serv_routes.route('/desc', methods=['GET'])
 def get_desc():
     result = serv_utils.get_attr_desc(df, attrs_desc)
